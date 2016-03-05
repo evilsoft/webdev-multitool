@@ -1,0 +1,36 @@
+{
+  "name": "webdev-multitool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:app": "electron .",
+    "start:dev": "webpack-dev-server --inline",
+    "start": "parallelshell 'npm run start:dev' 'npm run start:app'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Ian Hofmann-Hicks (evil)",
+  "license": "ISC",
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "devDependencies": {
+    "babel-core": "^6.5.2",
+    "babel-loader": "^6.2.4",
+    "babel-polyfill": "^6.5.0",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-register": "^6.5.2",
+    "css-loader": "^0.23.1",
+    "electron-prebuilt": "^0.36.9",
+    "less": "^2.6.0",
+    "less-loader": "^2.2.2",
+    "less-plugin-autoprefix": "^1.5.1",
+    "parallelshell": "^2.0.0",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
