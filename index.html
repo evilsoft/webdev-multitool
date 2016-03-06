@@ -6,8 +6,12 @@
     <title>Tickle Parade</title>
   </head>
   <body>
-    <h1>Eveybody gets a puppy!</h1>
-    <small>No exceptions</small>
+    <div data-ui="app"></div>
     <script src="http://localhost:8080/assets/bundle.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      WebApp.start({
+        target: document.querySelector('[data-ui="app"]')
+      })
+    </script>
   </body>
 </html>

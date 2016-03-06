@@ -1,3 +1,9 @@
 import '../less/main.less'
 
-console.log('works!');
+import { start } from './app'
+
+const app = {
+  start(options={}) { start(options) }
+}
+
+module.exports = app

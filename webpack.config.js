@@ -23,7 +23,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, include: paths.src, loader: 'babel?cacheDirectory' },
+      { test: /\.js$/, include: paths.src, loader: 'babel?cacheDirectory&plugins[]=mjsx' },
       { test: /\.less$/, include: paths.src, loader: 'style!css!less' },
     ]
   },
@@ -31,8 +31,5 @@ module.exports = {
     lessPlugins: [
       new LessPluginAutoprefix({ browsers: [ 'last 2 versions' ] })
     ]
-  },
-  devServer: {
-    noInfo: true
   }
 }
