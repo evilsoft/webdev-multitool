@@ -1,4 +1,7 @@
-import m from 'mithril'
+import m      from 'mithril'
+import store  from '../store'
+
+const { dispatch, getState } = store
 
 const baseNavs = [
   { action: 'encode', label: 'Encode/Decode' },
@@ -25,12 +28,24 @@ function buildNavs(navs, navigate, isSelected) {
 }
 
 function controller(attrs) {
-  return attrs
+  const isSelected = a => a === getState().page
+  const nav = a => () => navigate(a)
+
+  function navigate(page) {
+    return dispatch({
+      type: 'NAVIGATE',
+      page
+    })
+  }
+
+  return {
+    isSelected,
+    nav
+  }
 }
 
 function view(ctrl) {
-  const { navigate, isSelected } = ctrl
-  const nav = action => () => navigate(action)
+  const { nav, isSelected } = ctrl
   return (
     <ul>
       {buildNavs(baseNavs, nav, isSelected)}
