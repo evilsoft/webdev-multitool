@@ -1,26 +1,28 @@
 import m      from 'mithril'
 import store  from '../store'
 
-const { dispatch, getState } = store
+import { navigate } from '../actions'
+
+const { getState } = store
 
 const baseNavs = [
-  { action: 'encode', label: 'Encode/Decode' },
-  { action: 'generate', label: 'Generate' },
-  { action: 'format', label: 'Format' },
-  { action: 'color', label: 'Color' },
-  { action: 'web', label: 'Web Requests' }
+  { page: 'encode', label: 'Encode/Decode' },
+  { page: 'generate', label: 'Generate' },
+  { page: 'format', label: 'Format' },
+  { page: 'color', label: 'Color' },
+  { page: 'web', label: 'Web Requests' }
 ]
 
 function buildNavs(navs, navigate, isSelected) {
   return navs.map((nav) => {
     let classes = [ 'sidebar__item' ]
 
-    if(isSelected(nav.action)) {
+    if(isSelected(nav.page)) {
       classes = classes.concat('sidebar__item--selected')
     }
 
     return (
-      <li className={classes.join(' ')} onclick={navigate(nav.action)}>
+      <li className={classes.join(' ')} onclick={navigate(nav.page)}>
         {nav.label}
       </li>
     )
@@ -30,13 +32,6 @@ function buildNavs(navs, navigate, isSelected) {
 function controller(attrs) {
   const isSelected = a => a === getState().page
   const nav = a => () => navigate(a)
-
-  function navigate(page) {
-    return dispatch({
-      type: 'NAVIGATE',
-      page
-    })
-  }
 
   return {
     isSelected,
