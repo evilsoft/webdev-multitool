@@ -1,5 +1,7 @@
 import m from 'mithril'
 
+import { connect } from '../store'
+
 import SidebarNavs from './SidebarNavs'
 
 function view(ctrl, attrs) {
@@ -14,6 +16,6 @@ function view(ctrl, attrs) {
   )
 }
 
-const AppLayout = { view }
+const AppLayout = connect({ view })
 
 export default AppLayout

@@ -1,12 +1,8 @@
-import store from './store'
-
-const { dispatch } = store
-
-const NAVIGATE = 'NAVIGATE'
+export const NAVIGATE = 'NAVIGATE'
 
 export function navigate(page) {
-  return dispatch({
+  return {
     type: 'NAVIGATE',
     page
-  })
+  }
 }

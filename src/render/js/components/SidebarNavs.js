@@ -1,9 +1,9 @@
 import m      from 'mithril'
-import store  from '../store'
 
 import { navigate } from '../actions'
 
-const { getState } = store
+import bindAction from '../../lib/bindAction'
+import compose    from '../../lib/compose'
 
 const baseNavs = [
   { page: 'encode', label: 'Encode/Decode' },
@@ -29,25 +29,21 @@ function buildNavs(navs, navigate, isSelected) {
   })
 }
 
-function controller(attrs) {
-  const isSelected = a => a === getState().page
-  const nav = a => () => navigate(a)
+function view(ctrl, attrs) {
+  const { page, dispatch } = attrs
 
-  return {
-    isSelected,
-    nav
-  }
-}
+  const isSelected = page => a => a === page
 
-function view(ctrl) {
-  const { nav, isSelected } = ctrl
+  const dispatchAction = compose(bindAction(dispatch), navigate)
+  const nav = a => () => dispatchAction(a)
+
   return (
     <ul>
-      {buildNavs(baseNavs, nav, isSelected)}
+      {buildNavs(baseNavs, nav, isSelected(page))}
     </ul>
   )
 }
 
-const SidebarNavs = { controller, view }
+const SidebarNavs = { view }
 
 export default SidebarNavs
