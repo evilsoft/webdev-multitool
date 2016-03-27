@@ -1,17 +1,9 @@
 import m      from 'mithril'
 
 import { navigate } from '../actions'
+import { navs } from '../constants'
 
-import bindAction from '../../lib/bindAction'
-import compose    from '../../lib/compose'
-
-const baseNavs = [
-  { page: 'encode', label: 'Encode/Decode' },
-  { page: 'generate', label: 'Generate' },
-  { page: 'format', label: 'Format' },
-  { page: 'color', label: 'Color' },
-  { page: 'web', label: 'Web Requests' }
-]
+import compose from '../../lib/compose'
 
 function buildNavs(navs, navigate, isSelected) {
   return navs.map((nav) => {
@@ -34,12 +26,12 @@ function view(ctrl, attrs) {
 
   const isSelected = page => a => a === page
 
-  const dispatchAction = compose(bindAction(dispatch), navigate)
+  const dispatchAction = compose(dispatch, navigate)
   const nav = a => () => dispatchAction(a)
 
   return (
     <ul>
-      {buildNavs(baseNavs, nav, isSelected(page))}
+      {buildNavs(navs, nav, isSelected(page))}
     </ul>
   )
 }
