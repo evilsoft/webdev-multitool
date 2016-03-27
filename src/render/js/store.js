@@ -7,8 +7,8 @@ import { NAVIGATE } from './actions'
 function reducer(state={}, action) {
   switch(action.type) {
     case NAVIGATE:
-      const { page } = action
-      return Object.assign({}, state, { page })
+      const { currentPage } = action
+      return Object.assign({}, state, { currentPage })
   }
   return state
 }

@@ -1,8 +1,8 @@
 export const NAVIGATE = 'NAVIGATE'
 
-export function navigate(page) {
+export function navigate(currentPage) {
   return {
     type: 'NAVIGATE',
-    page
+    currentPage
   }
 }

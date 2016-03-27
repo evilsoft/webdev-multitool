@@ -3,8 +3,9 @@ var path = require('path')
 var LessPluginAutoprefix = require('less-plugin-autoprefix')
 
 var paths = {
-  src: path.join(__dirname, 'src/render'),
-  dest: path.join(__dirname, 'build')
+  src:  path.join(__dirname, 'src/render'),
+  dest: path.join(__dirname, 'build'),
+  lib:  path.join(__dirname, 'src/lib')
 }
 
 module.exports = {
@@ -23,7 +24,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, include: paths.src, loader: 'babel?cacheDirectory&plugins[]=mjsx' },
+      { test: /\.js$/, include: [ paths.src, paths.lib ], loader: 'babel?cacheDirectory&plugins[]=mjsx' },
       { test: /\.less$/, include: paths.src, loader: 'style!css!less' },
     ]
   },
