@@ -1,7 +1,9 @@
 import electron from 'electron'
 import path     from 'path'
 
-const { app, BrowserWindow } = electron
+import menus  from './menus'
+
+const { app, BrowserWindow, Menu } = electron
 
 const html = path.join(__dirname, '../../', 'index.html')
 
@@ -12,9 +14,10 @@ app.on('window-all-closed', () => {
 })
 
 app.on('ready', () => {
-  let main
-  main = new BrowserWindow({width: 800, height: 600})
+  let main = new BrowserWindow({width: 800, height: 600})
   main.loadURL(`file://${html}`)
+
+  Menu.setApplicationMenu(Menu.buildFromTemplate(menus()))
 
   main.on('closed', () => {
     main = null
