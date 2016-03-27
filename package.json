@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:app": "electron .",
+    "start:app": "nodemon -q -w src/main -x 'electron .'",
     "start:dev": "webpack-dev-server --inline",
     "start": "parallelshell 'npm run start:dev' 'npm run start:app'",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -29,6 +29,7 @@
     "less": "^2.6.0",
     "less-loader": "^2.2.2",
     "less-plugin-autoprefix": "^1.5.1",
+    "nodemon": "^1.9.1",
     "parallelshell": "^2.0.0",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.14",
