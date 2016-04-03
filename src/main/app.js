@@ -3,6 +3,8 @@ import path     from 'path'
 
 import menus  from './menus'
 
+import sendToChannel from '../lib/sendToChannel'
+
 const { app, BrowserWindow, Menu } = electron
 
 const html = path.join(__dirname, '../../', 'index.html')
@@ -17,9 +19,7 @@ app.on('ready', () => {
   let main = new BrowserWindow({width: 800, height: 600})
   let { webContents } = main
 
-  function navigate(page) {
-    webContents.send('navigate', page)
-  }
+  const navigate  = sendToChannel(webContents, 'navigate')
 
   main.loadURL(`file://${html}`)
 

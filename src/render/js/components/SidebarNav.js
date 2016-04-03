@@ -1,8 +1,8 @@
-import m from 'mithril'
+import m        from 'mithril'
+import compose  from 'ramda/src/compose'
 
 import { navigate } from '../actions'
 
-import compose  from '../../../lib/compose'
 import concatIf from '../../../lib/concatIf'
 
 function controller(attrs) {
