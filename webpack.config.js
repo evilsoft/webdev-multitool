@@ -10,6 +10,7 @@ var paths = {
 
 module.exports = {
   context: paths.src,
+  target: 'electron',
   entry:   './js',
   output: {
     filename:       'bundle.js',

@@ -15,9 +15,15 @@ app.on('window-all-closed', () => {
 
 app.on('ready', () => {
   let main = new BrowserWindow({width: 800, height: 600})
+  let { webContents } = main
+
+  function navigate(page) {
+    webContents.send('navigate', page)
+  }
+
   main.loadURL(`file://${html}`)
 
-  Menu.setApplicationMenu(Menu.buildFromTemplate(menus()))
+  Menu.setApplicationMenu(Menu.buildFromTemplate(menus({ navigate })))
 
   main.on('closed', () => {
     main = null

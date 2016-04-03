@@ -1,7 +1,3 @@
-function navigate(page) {
-  return () => console.log(page)
-}
-
 function reload(item, win) {
   if(win) {
     win.reload()
@@ -14,16 +10,20 @@ function toggleDevTools(item, win) {
   }
 }
 
-export default function menus() {
+export default function menus(hooks) {
+  const { navigate } = hooks
+
+  const navigateTo = page => () => navigate(page)
+
   return [
     {
       label: 'Tools',
       submenu: [
-        { label: 'Encode/Decode', click: navigate('encode') },
-        { label: 'Generate', click: navigate('generate') },
-        { label: 'Format', click: navigate('format') },
-        { label: 'Color', click: navigate('color') },
-        { label: 'Web Request', click: navigate('web') }
+        { label: 'Encode/Decode', click: navigateTo('encode') },
+        { label: 'Generate', click: navigateTo('generate') },
+        { label: 'Format', click: navigateTo('format') },
+        { label: 'Color', click: navigateTo('color') },
+        { label: 'Web Request', click: navigateTo('web') }
       ]
     }, {
       label: 'Edit',
