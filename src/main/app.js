@@ -26,6 +26,7 @@ app.on('ready', () => {
   Menu.setApplicationMenu(Menu.buildFromTemplate(menus({ navigate })))
 
   main.on('closed', () => {
+    webContents = null
     main = null
   })
 })

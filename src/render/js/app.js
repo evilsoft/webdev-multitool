@@ -1,16 +1,17 @@
 import m, { mount } from 'mithril'
+import electron     from 'electron'
 
-import electron from 'electron'
+import store        from './store'
+import { navigate } from './actions'
+
+import AppLayout from './components/AppLayout'
 
 const { ipcRenderer } = electron
 
 ipcRenderer.on('navigate', function(sender, data) {
-  console.log(data);
+  store.dispatch(navigate(data))
+  m.redraw()
 })
-
-import store from './store'
-
-import AppLayout from './components/AppLayout'
 
 export function start(options={}) {
   const { target } = options
