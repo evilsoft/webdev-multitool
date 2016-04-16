@@ -1,3 +1,5 @@
+const thunkApply  = fn => (...args) => () => fn(...args)
+
 function reload(item, win) {
   if(win) {
     win.reload()
@@ -13,7 +15,7 @@ function toggleDevTools(item, win) {
 export default function menus(hooks) {
   const { navigate } = hooks
 
-  const navigateTo = page => () => navigate(page)
+  const navigateTo = thunkApply(navigate)
 
   return [
     {
