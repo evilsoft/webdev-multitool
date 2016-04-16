@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "mithril": "^0.2.3",
+    "node-uuid": "^1.4.7",
     "ramda": "^0.20.1",
     "redux": "^3.3.1"
   }
