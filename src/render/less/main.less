@@ -4,3 +4,54 @@
 @import 'utility/all';
 
 @import 'components/all';
+
+.form--inline {
+  & > * {
+    margin-left: 1rem;
+  }
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.base-input {
+  .spacing(0.5rem, 1rem);
+  font-size: inherit;
+  outline: none;
+  border: 3px solid;
+  border-radius: 7px;
+}
+
+.button {
+  .base-input;
+  cursor: pointer;
+}
+
+.text {
+  .base-input;
+}
+
+.label {
+  &__text {
+    margin-right: 1rem;
+  }
+}
+
+.workspace {
+  margin-left: 30rem;
+  padding: 2rem;
+}
+
+.uuid {
+  .deci;
+
+  &__entry {
+    .spacing(2rem);
+    text-align: center;
+  }
+
+  &__results {
+    .bg-green;
+  }
+}
