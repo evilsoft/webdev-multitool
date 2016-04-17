@@ -3,6 +3,8 @@ import { ipcRenderer } from 'electron'
 
 import sendToChannel from '../../../lib/sendToChannel'
 
+import UuidItem from './UuidItem'
+
 const sendTask    = sendToChannel(ipcRenderer, 'task')
 const requestUUID = fn => prop => () => fn({ type: 'uuid', num: prop() })
 
@@ -16,7 +18,8 @@ function controller(attrs) {
 
 function view(ctrl, attrs) {
   const { num, request } = ctrl
-  console.log(attrs);
+  const { uuids } = attrs
+  const results = uuids || []
 
   return (
     <div className="workspace">
@@ -38,7 +41,9 @@ function view(ctrl, attrs) {
             onclick={request}
           >Generate</button>
         </div>
-        <div className="uuid__results">Results</div>
+        <ul className="uuid__results">
+          {results.map(uuid => <UuidItem uuid={uuid} />)}
+        </ul>
       </div>
     </div>
   )
