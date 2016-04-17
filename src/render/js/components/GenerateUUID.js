@@ -8,6 +8,14 @@ import UuidItem from './UuidItem'
 const sendTask    = sendToChannel(ipcRenderer, 'task')
 const requestUUID = fn => prop => () => fn({ type: 'uuid', num: prop() })
 
+function mapItems(Comp, attrs) {
+  const { dispatch } = attrs
+
+  return function(uuid, index) {
+    return <Comp dispatch={dispatch} index={index} uuid={uuid} />
+  }
+}
+
 
 function controller(attrs) {
   const num     = m.prop('')
@@ -18,7 +26,7 @@ function controller(attrs) {
 
 function view(ctrl, attrs) {
   const { num, request } = ctrl
-  const { uuids } = attrs
+  const { uuids, dispatch } = attrs
   const results = uuids || []
 
   return (
@@ -42,7 +50,7 @@ function view(ctrl, attrs) {
           >Generate</button>
         </div>
         <ul className="uuid__results">
-          {results.map(uuid => <UuidItem uuid={uuid} />)}
+          {results.map(mapItems(UuidItem, { dispatch }))}
         </ul>
       </div>
     </div>
