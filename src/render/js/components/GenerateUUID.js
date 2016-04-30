@@ -6,7 +6,7 @@ import sendToChannel from '../../../lib/sendToChannel'
 import UuidItem from './UuidItem'
 
 const sendTask    = sendToChannel(ipcRenderer, 'task')
-const requestUUID = fn => prop => () => fn({ type: 'uuid', num: prop() })
+const requestUUID = (fn, prop) => () => fn({ type: 'uuid', num: prop() })
 
 function mapItems(Comp, attrs) {
   const { dispatch } = attrs
@@ -16,10 +16,9 @@ function mapItems(Comp, attrs) {
   }
 }
 
-
 function controller(attrs) {
   const num     = m.prop('')
-  const request = requestUUID(sendTask)(num)
+  const request = requestUUID(sendTask, num)
 
   return { num, request }
 }

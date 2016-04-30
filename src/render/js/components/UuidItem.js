@@ -3,14 +3,16 @@ import { clipboard } from 'electron'
 
 import { deleteUuid } from '../actions'
 
+import actionDispatch from '../../../lib/actionDispatch'
+
 const copyItem    = (clip, uuid) => () => clip.writeText(uuid)
-const deleteItem  = (dispatch, action, index) => () => dispatch(action(index))
+const deleteItem  = actionDispatch(deleteUuid)
 
 function controller(attrs) {
   const { uuid, dispatch, index } = attrs
 
   const copy    = copyItem(clipboard, uuid)
-  const remove  = deleteItem(dispatch, deleteUuid, index)
+  const remove  = deleteItem(dispatch, index)
 
   return { copy, remove }
 }
