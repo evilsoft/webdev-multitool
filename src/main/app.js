@@ -5,12 +5,17 @@ import menus  from './menus'
 
 import sendToChannel from '../lib/sendToChannel'
 
+import compose  from 'ramda/src/compose'
+import objOf    from 'ramda/src/objOf'
+
 import { v4 } from 'node-uuid'
 
 const { app, BrowserWindow, Menu, ipcMain } = electron
 
 const html = path.join(__dirname, '../../', 'index.html')
 const thunk = fn => () => fn()
+
+const wrapUuid = compose(objOf('uuid'), v4)
 
 function generateUUID(fn, num) {
   return Array(parseInt(num)).fill(null).map(fn)
@@ -23,7 +28,7 @@ ipcMain.on('task', (e, data) => {
   switch(type) {
     case 'uuid':
       const { num } = data
-      send(generateUUID(thunk(v4), num))
+      send(generateUUID(thunk(wrapUuid), num))
       break
   }
 })

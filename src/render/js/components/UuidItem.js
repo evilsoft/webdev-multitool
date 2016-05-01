@@ -11,7 +11,7 @@ const deleteItem  = actionDispatch(deleteUuid)
 function controller(attrs) {
   const { uuid, dispatch, index } = attrs
 
-  const copy    = copyItem(clipboard, uuid)
+  const copy    = copyItem(clipboard, uuid.uuid)
   const remove  = deleteItem(dispatch, index)
 
   return { copy, remove }
@@ -23,7 +23,7 @@ function view(ctrl, attrs) {
 
   return (
     <li className="uuid__item">
-      <span className="uuid__uuid">{uuid}</span>
+      <span className="uuid__uuid">{uuid.uuid}</span>
       <div className="uuid__buttons form--inline">
         <button
           className="button"
