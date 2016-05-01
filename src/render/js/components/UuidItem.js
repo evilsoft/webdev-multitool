@@ -1,18 +1,31 @@
 import m from 'mithril'
 import { clipboard } from 'electron'
 
-import { deleteUuid } from '../actions'
+import concatIf from '../../../lib/concatIf'
+
+import compose from 'ramda/src/compose'
+
+import {
+  deleteUuid,
+  markUuid
+} from '../actions'
 
 import actionDispatch from '../../../lib/actionDispatch'
 
-const copyItem    = (clip, uuid) => () => clip.writeText(uuid)
+const texttoClip = clip => uuid => () => clip.writeText(uuid)
+
+const copyIem     = texttoClip(clipboard)
+const markItem    = actionDispatch(markUuid)
 const deleteItem  = actionDispatch(deleteUuid)
 
 function controller(attrs) {
   const { uuid, dispatch, index } = attrs
+  const remove = deleteItem(dispatch, index)
 
-  const copy    = copyItem(clipboard, uuid.uuid)
-  const remove  = deleteItem(dispatch, index)
+  const copy = compose(
+    markItem(dispatch, index),
+    copyIem(uuid.uuid)
+  )
 
   return { copy, remove }
 }
@@ -21,8 +34,11 @@ function view(ctrl, attrs) {
   const { uuid } = attrs
   const { copy, remove } = ctrl
 
+  const used    = concatIf('uuid__item--used', uuid.used)
+  const classes = used([ 'uuid__item' ]).join(' ')
+
   return (
-    <li className="uuid__item">
+    <li className={classes}>
       <span className="uuid__uuid">{uuid.uuid}</span>
       <div className="uuid__buttons form--inline">
         <button

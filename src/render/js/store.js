@@ -5,10 +5,19 @@ import { createStore } from 'redux'
 import {
   NAVIGATE,
   UUID_ADD,
-  UUID_DELETE
+  UUID_DELETE,
+  UUID_MARK_USED
 } from './actions'
 
+import lensIndex  from 'ramda/src/lensIndex'
+import lensProp   from 'ramda/src/lensProp'
+import over       from 'ramda/src/over'
+import assoc      from 'ramda/src/assoc'
+import compose    from 'ramda/src/compose'
+
 function reducer(state={}, action) {
+  const { index } = action
+
   switch(action.type) {
     case NAVIGATE:
       const { currentPage } = action
@@ -21,13 +30,15 @@ function reducer(state={}, action) {
       return Object.assign({}, state, { uuids: oldList.concat(uuids) })
 
     case UUID_DELETE:
-      const { index } = action
-
       const result = state.uuids
         .slice(0, index)
         .concat(state.uuids.slice(index + 1))
 
       return Object.assign({}, state, { uuids: result })
+
+    case UUID_MARK_USED:
+      const itemLens = compose(lensProp('uuids'), lensIndex(index))
+      return over(itemLens, assoc('used', true), state)
   }
   return state
 }
