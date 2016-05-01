@@ -2,7 +2,8 @@ import m from 'mithril'
 
 import { connect } from '../store'
 
-import SidebarNavs from './SidebarNavs'
+import SidebarNavs  from './SidebarNavs'
+import GenerateUUID from './GenerateUUID'
 
 function view(ctrl, attrs) {
   return (
@@ -11,7 +12,7 @@ function view(ctrl, attrs) {
         <h2 className="sidebar__header">WebDev-Multitool</h2>
         <SidebarNavs { ...attrs } />
       </div>
-      <div data-region="workspace"></div>
+      <GenerateUUID {...attrs } />
     </div>
   )
 }
