@@ -1,7 +1,7 @@
 import m from 'mithril'
 import { ipcRenderer } from 'electron'
 
-import sendToChannel from '../../../lib/sendToChannel'
+import sendToChannel from 'shared/sendToChannel'
 
 import UuidItem from './UuidItem'
 

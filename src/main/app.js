@@ -3,7 +3,7 @@ import path     from 'path'
 
 import menus  from './menus'
 
-import sendToChannel from '../lib/sendToChannel'
+import sendToChannel from '../lib/shared/sendToChannel'
 
 import compose  from 'ramda/src/compose'
 import objOf    from 'ramda/src/objOf'

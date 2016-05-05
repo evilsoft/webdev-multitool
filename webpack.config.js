@@ -21,6 +21,7 @@ module.exports = {
 
   },
   resolve: {
+    root: [ paths.lib ],
     extensions: [ '', '.js', '.less' ]
   },
   module: {

@@ -1,16 +1,16 @@
 import m from 'mithril'
 import { clipboard } from 'electron'
 
-import concatIf from '../../../lib/concatIf'
-
 import compose from 'ramda/src/compose'
+
+import concatIf       from 'shared/concatIf'
+import actionDispatch from 'render/actionDispatch'
 
 import {
   deleteUuid,
   markUuid
 } from '../actions'
 
-import actionDispatch from '../../../lib/actionDispatch'
 
 const texttoClip = clip => uuid => () => clip.writeText(uuid)
 
