@@ -2,17 +2,12 @@ import m from 'mithril'
 
 import { connect } from '../store'
 
-import SidebarNavs  from './SidebarNavs'
-import GenerateUUID from './GenerateUUID'
+import GenerateUuid from './GenerateUuid'
 
 function view(ctrl, attrs) {
   return (
     <div>
-      <div className="sidebar" data-region="sidebar">
-        <h2 className="sidebar__header">WebDev-Multitool</h2>
-        <SidebarNavs { ...attrs } />
-      </div>
-      <GenerateUUID {...attrs } />
+      <GenerateUuid {...attrs } />
     </div>
   )
 }
