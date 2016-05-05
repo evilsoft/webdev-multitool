@@ -11,7 +11,7 @@ import { deleteUuid, markUuid } from 'actions/uuid'
 
 const texttoClip = clip => uuid => () => clip.writeText(uuid)
 
-const copyIem     = texttoClip(clipboard)
+const copyItem     = texttoClip(clipboard)
 const markItem    = actionDispatch(markUuid)
 const deleteItem  = actionDispatch(deleteUuid)
 
@@ -19,9 +19,11 @@ function controller(attrs) {
   const { uuid, dispatch, index } = attrs
   const remove = deleteItem(dispatch, index)
 
+  console.log('called controler');
+
   const copy = compose(
     markItem(dispatch, index),
-    copyIem(uuid.uuid)
+    copyItem(uuid.uuid)
   )
 
   return { copy, remove }
