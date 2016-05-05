@@ -1,14 +1,6 @@
-export const NAVIGATE       = 'NAVIGATE'
 export const UUID_ADD       = 'UUID_ADD'
 export const UUID_DELETE    = 'UUID_DELETE'
 export const UUID_MARK_USED = 'UUID_MARK_USED'
-
-export function navigate(currentPage) {
-  return {
-    type: NAVIGATE,
-    currentPage
-  }
-}
 
 export function addUuid(uuids) {
   return {
