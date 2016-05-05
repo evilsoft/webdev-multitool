@@ -1,0 +1,39 @@
+.uuid {
+  .deci;
+
+  &__entry {
+    .spacing(2rem);
+    text-align: center;
+  }
+
+  &__results {
+    list-style: none;
+    max-width:  60rem;
+    margin:     0 auto;
+  }
+
+  &__item {
+    .row;
+    .spacing(1rem);
+    border-radius:  5px;
+    align-items:    center;
+    font-size:      initial;
+
+    &:nth-child(odd) {
+      .bg-green;
+    }
+
+    &--used {
+      .red;
+    }
+  }
+
+  &__uuid {
+    flex: 1;
+    margin-left: 2rem;
+  }
+
+  &__buttons {
+    .deci;
+  }
+}
