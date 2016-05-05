@@ -4,8 +4,7 @@ import { createStore } from 'redux'
 
 import {
   UUID_ADD,
-  UUID_DELETE,
-  UUID_MARK_USED
+  UUID_DELETE
 } from 'actions/uuid'
 
 import lensIndex  from 'ramda/src/lensIndex'
@@ -30,10 +29,6 @@ function reducer(state={}, action) {
         .concat(state.uuids.slice(index + 1))
 
       return Object.assign({}, state, { uuids: result })
-
-    case UUID_MARK_USED:
-      const itemLens = compose(lensProp('uuids'), lensIndex(index))
-      return over(itemLens, assoc('used', true), state)
   }
   return state
 }

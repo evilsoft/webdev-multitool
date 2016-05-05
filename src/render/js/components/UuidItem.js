@@ -6,32 +6,23 @@ import compose from 'ramda/src/compose'
 import concatIf       from 'shared/concatIf'
 import actionDispatch from 'render/actionDispatch'
 
-import { deleteUuid, markUuid } from 'actions/uuid'
-
+import { deleteUuid } from 'actions/uuid'
 
 const texttoClip = clip => uuid => () => clip.writeText(uuid)
 
-const copyItem     = texttoClip(clipboard)
-const markItem    = actionDispatch(markUuid)
+const copyItem    = texttoClip(clipboard)
 const deleteItem  = actionDispatch(deleteUuid)
 
 function controller(attrs) {
   const { uuid, dispatch, index } = attrs
   const remove = deleteItem(dispatch, index)
 
-  console.log('called controler');
-
-  const copy = compose(
-    markItem(dispatch, index),
-    copyItem(uuid.uuid)
-  )
-
-  return { copy, remove }
+  return { copyItem, remove }
 }
 
 function view(ctrl, attrs) {
   const { uuid } = attrs
-  const { copy, remove } = ctrl
+  const { copyItem, remove } = ctrl
 
   const used    = concatIf('uuid__item--used', uuid.used)
   const classes = used([ 'uuid__item' ]).join(' ')
@@ -42,7 +33,7 @@ function view(ctrl, attrs) {
       <div className="uuid__buttons form--inline">
         <button
           className="button"
-          onclick={copy}
+          onclick={copyItem(uuid.uuid)}
           type="button">Copy</button>
         <button
           className="button"
