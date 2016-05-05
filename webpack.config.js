@@ -3,9 +3,10 @@ var path = require('path')
 var LessPluginAutoprefix = require('less-plugin-autoprefix')
 
 var paths = {
-  src:  path.join(__dirname, 'src/render'),
-  dest: path.join(__dirname, 'build'),
-  lib:  path.join(__dirname, 'src/lib')
+  src:    path.join(__dirname, 'src/render'),
+  dest:   path.join(__dirname, 'build'),
+  lib:    path.join(__dirname, 'src/lib'),
+  store:  path.join(__dirname, 'src/render/js/store')
 }
 
 module.exports = {
@@ -18,10 +19,12 @@ module.exports = {
     libraryTarget:  'umd',
     path:           paths.dest,
     publicPath:     '/assets/'
-
   },
   resolve: {
-    root: [ paths.lib ],
+    root: [
+      paths.lib,
+      paths.store
+    ],
     extensions: [ '', '.js', '.less' ]
   },
   module: {

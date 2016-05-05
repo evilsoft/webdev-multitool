@@ -3,11 +3,10 @@ import m from 'mithril'
 import { createStore } from 'redux'
 
 import {
-  NAVIGATE,
   UUID_ADD,
   UUID_DELETE,
   UUID_MARK_USED
-} from './actions'
+} from 'actions/uuid'
 
 import lensIndex  from 'ramda/src/lensIndex'
 import lensProp   from 'ramda/src/lensProp'
@@ -19,10 +18,6 @@ function reducer(state={}, action) {
   const { index } = action
 
   switch(action.type) {
-    case NAVIGATE:
-      const { currentPage } = action
-      return Object.assign({}, state, { currentPage })
-
     case UUID_ADD:
       const { uuids } = action
       const oldList = state.uuids || []

@@ -1,6 +1,6 @@
 import m from 'mithril'
 
-import { connect } from '../store'
+import { connect } from 'store'
 
 import GenerateUuid from './GenerateUuid'
 

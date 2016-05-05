@@ -1,8 +1,8 @@
 import m, { mount } from 'mithril'
 import electron     from 'electron'
 
-import store        from './store'
-import { addUuid }  from './actions'
+import store        from 'store'
+import { addUuid }  from 'actions/uuid'
 
 import AppLayout from './components/AppLayout'
 

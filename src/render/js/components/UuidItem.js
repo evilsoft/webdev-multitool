@@ -6,10 +6,7 @@ import compose from 'ramda/src/compose'
 import concatIf       from 'shared/concatIf'
 import actionDispatch from 'render/actionDispatch'
 
-import {
-  deleteUuid,
-  markUuid
-} from '../actions'
+import { deleteUuid, markUuid } from 'actions/uuid'
 
 
 const texttoClip = clip => uuid => () => clip.writeText(uuid)
