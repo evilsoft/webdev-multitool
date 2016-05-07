@@ -1,17 +1,20 @@
 import m from 'mithril'
 
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 
 import {
   UUID_ADD,
   UUID_DELETE
 } from 'actions/uuid'
 
-import lensIndex  from 'ramda/src/lensIndex'
-import lensProp   from 'ramda/src/lensProp'
-import over       from 'ramda/src/over'
-import assoc      from 'ramda/src/assoc'
-import compose    from 'ramda/src/compose'
+function redraw() {
+  return (next) => (action) => {
+    m.startComputation()
+    const result = next(action)
+    m.endComputation()
+    return result
+  }
+}
 
 function reducer(state={}, action) {
   const { index } = action
@@ -33,7 +36,7 @@ function reducer(state={}, action) {
   return state
 }
 
-const store = createStore(reducer)
+const store = createStore(reducer, {}, applyMiddleware(redraw))
 
 export function connect(Component) {
   return {
