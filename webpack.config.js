@@ -13,6 +13,8 @@ module.exports = {
   context: paths.src,
   target: 'electron',
   entry:   './js',
+  debug: true,
+  devtool: '#eval-source-map',
   output: {
     filename:       'bundle.js',
     library:        'WebApp',
