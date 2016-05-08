@@ -1,5 +1,5 @@
-import m from 'mithril'
-import { clipboard } from 'electron'
+import m              from 'mithril'
+import { clipboard }  from 'electron'
 
 import compose from 'ramda/src/compose'
 

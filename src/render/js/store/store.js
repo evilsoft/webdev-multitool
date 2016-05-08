@@ -4,7 +4,8 @@ import { createStore, applyMiddleware } from 'redux'
 
 import {
   UUID_ADD,
-  UUID_DELETE
+  UUID_DELETE,
+  UUID_CLEAR
 } from 'actions/uuid'
 
 function redraw() {
@@ -32,6 +33,9 @@ function reducer(state={}, action) {
         .concat(state.uuids.slice(index + 1))
 
       return Object.assign({}, state, { uuids: result })
+
+    case UUID_CLEAR:
+      return Object.assign({}, state, { uuids: [] })
   }
   return state
 }
