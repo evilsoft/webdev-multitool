@@ -29,23 +29,23 @@ function view(ctrl) {
     <div className="uuid__entry form--inline">
       <div className="buttonGroup">
         <button
-          className="button uuid__button"
+          className="button"
           type="button"
           onclick={request(1)}
         >+1</button>
         <button
-          className="button uuid__button"
+          className="button"
           type="button"
           onclick={request(5)}
         >+5</button>
         <button
-          className="button uuid__button"
+          className="button"
           type="button"
           onclick={request(10)}
         >+10</button>
       </div>
       <button
-        className="button uuid__button"
+        className="button"
         type="button"
         onclick={clear}
       >Clear</button>
