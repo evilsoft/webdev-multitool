@@ -1,22 +1,10 @@
-import m              from 'mithril'
-import { clipboard }  from 'electron'
-
-import compose from 'ramda/src/compose'
-
-const texttoClip  = clip => uuid => () => clip.writeText(uuid)
-const copyItem    = texttoClip(clipboard)
-
-function controller(attrs) {
-  return { copyItem }
-}
+import m  from 'mithril'
 
 function view(ctrl, attrs) {
-  const { index, remove } = attrs
-  const { uuid }  = attrs.uuid
+  const { index, use }  = attrs
+  const { uuid }        = attrs.uuid
 
-  const { copyItem } = ctrl
-
-  const useUuid = compose(remove(index), copyItem(uuid))
+  const useUuid = () => use({index, uuid})
 
   return (
     <li className="uuid__item">
@@ -31,6 +19,6 @@ function view(ctrl, attrs) {
   )
 }
 
-const UuidItem = { controller, view }
+const UuidItem = { view }
 
 export default UuidItem

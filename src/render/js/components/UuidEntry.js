@@ -1,7 +1,8 @@
 import m  from 'mithril'
 
 function view(ctrl, attrs) {
-  const { request, clear } = attrs
+  const { request } = attrs
+  const clear = () => attrs.clear(null)
 
   return (
     <div className="uuid__entry form--inline">

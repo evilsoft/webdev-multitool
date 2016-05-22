@@ -3,11 +3,11 @@ import m from 'mithril'
 import UuidItem from './UuidItem'
 
 function view(ctrl, attrs) {
-  const { uuids, remove } = attrs
+  const { uuids, use } = attrs
 
   return (
     <ul className="uuid__results">
-      {uuids.map((x, i) => (<UuidItem index={i} uuid={x} remove={remove} /> ))}
+      {uuids.map((x, i) => (<UuidItem index={i} uuid={x} use={use} /> ))}
     </ul>
   )
 }

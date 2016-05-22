@@ -1,13 +1,14 @@
 import m from 'mithril'
-import { ipcRenderer }  from 'electron'
 
 import {
   clearUuid,
   deleteUuid
 } from 'actions/uuid'
 
-import curry from 'ramda/src/curry'
-import sendToChannel  from 'shared/sendToChannel'
+import curry    from 'ramda/src/curry'
+import compose  from 'ramda/src/compose'
+import prop     from 'ramda/src/prop'
+
 import actionDispatch from 'render/actionDispatch'
 
 import UuidEntry  from './UuidEntry'
@@ -16,28 +17,33 @@ import UuidList   from './UuidList'
 const clearUuids  = actionDispatch(clearUuid)
 const deleteItem  = actionDispatch(deleteUuid)
 
-const sendTask    = sendToChannel(ipcRenderer, 'task')
 const requestUUID = curry((fn, num) => () => fn({ type: 'uuid', num }))
-const request     = requestUUID(sendTask)
+
+const thunkId = x => () => x
 
 function controller(attrs) {
-  const { dispatch } = attrs
+  const { dispatch, copyText, sendTask } = attrs
 
-  const clear   = clearUuids(dispatch, null)
-  const remove  = deleteItem(dispatch)
+  const request = requestUUID(sendTask)
+  const clear   = clearUuids(dispatch)
+  const remove  = x => compose(thunkId(x), deleteItem(dispatch), prop('index'))(x)
+  const copy    = x => compose(thunkId(x), copyText, prop('uuid'))(x)
 
-  return { clear, remove }
+  const use = compose(remove, copy)
+
+  return { clear, request, use }
 }
 
 function view(ctrl, attrs) {
-  const { uuids, dispatch } = attrs
+  const { uuids } = attrs
   const results = uuids || []
-  const { clear, remove } = ctrl
+
+  const { clear, use, request } = ctrl
 
   return (
     <div className="uuid">
       <UuidEntry request={request} clear={clear} />
-      <UuidList remove={remove} uuids={results} />
+      <UuidList use={use} uuids={results} />
     </div>
   )
 }
