@@ -1,0 +1,55 @@
+.form--inline {
+  & > * {
+    margin-left: 1rem;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.base-input {
+  .spacing(0.5rem, 1rem);
+  font-size:  inherit;
+  outline:    none;
+  border:     3px solid;
+  border-radius:  7px;
+}
+
+.buttonGroup {
+  display: inline-block;
+}
+
+.button {
+  .base-input;
+  cursor: pointer;
+
+  .buttonGroup & {
+    border: 1px solid;
+    border-top: 3px solid;
+    border-bottom: 3px solid;
+    border-radius: 0;
+  }
+
+  .buttonGroup &:first-child {
+    border-left:                3px solid;
+    border-top-left-radius:     5px;
+    border-bottom-left-radius:  5px;
+  }
+
+  .buttonGroup &:last-child {
+    border-right:                3px solid;
+    border-top-right-radius:     5px;
+    border-bottom-right-radius:  5px;
+  }
+}
+
+.text {
+  .base-input;
+}
+
+.label {
+  &__text {
+    margin-right: 1rem;
+  }
+}

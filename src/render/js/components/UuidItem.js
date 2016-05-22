@@ -30,7 +30,7 @@ function view(ctrl, attrs) {
   return (
     <li className="uuid__item">
       <span className="uuid__uuid">{uuid}</span>
-      <div className="uuid__buttons form--inline">
+      <div className="uuid__buttons">
         <button
           className="button"
           onclick={useUuid}
