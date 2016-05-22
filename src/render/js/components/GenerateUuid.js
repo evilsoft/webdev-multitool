@@ -1,15 +1,7 @@
 import m from 'mithril'
 
-import UuidItem   from './UuidItem'
 import UuidEntry  from './UuidEntry'
-
-function mapItems(Comp, attrs) {
-  const { dispatch } = attrs
-
-  return function(uuid, index) {
-    return <Comp dispatch={dispatch} index={index} uuid={uuid} />
-  }
-}
+import UuidList   from './UuidList'
 
 function view(ctrl, attrs) {
   const { uuids, dispatch } = attrs
@@ -18,9 +10,7 @@ function view(ctrl, attrs) {
   return (
     <div className="uuid">
       <UuidEntry dispatch={dispatch} />
-      <ul className="uuid__results">
-        {results.map(mapItems(UuidItem, { dispatch }))}
-      </ul>
+      <UuidList dispatch={dispatch} uuids={results} />
     </div>
   )
 }
