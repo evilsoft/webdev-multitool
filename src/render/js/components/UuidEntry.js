@@ -1,29 +1,7 @@
-import m                from 'mithril'
-import { ipcRenderer }  from 'electron'
+import m  from 'mithril'
 
-import curry from 'ramda/src/curry'
-
-import sendToChannel  from 'shared/sendToChannel'
-import actionDispatch from 'render/actionDispatch'
-
-import { clearUuid } from 'actions/uuid'
-
-const sendTask    = sendToChannel(ipcRenderer, 'task')
-const requestUUID = curry((fn, num) => () => fn({ type: 'uuid', num }))
-
-const clearUuids = actionDispatch(clearUuid)
-
-function controller(attrs) {
-  const { dispatch } = attrs
-
-  const request = requestUUID(sendTask)
-  const clear   = clearUuids(dispatch, null)
-
-  return { request, clear }
-}
-
-function view(ctrl) {
-  const { num, request, clear } = ctrl
+function view(ctrl, attrs) {
+  const { request, clear } = attrs
 
   return (
     <div className="uuid__entry form--inline">
@@ -53,6 +31,6 @@ function view(ctrl) {
   )
 }
 
-const UuidEntry = { view, controller }
+const UuidEntry = { view }
 
 export default UuidEntry

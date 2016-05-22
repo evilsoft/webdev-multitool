@@ -3,27 +3,18 @@ import { clipboard }  from 'electron'
 
 import compose from 'ramda/src/compose'
 
-import actionDispatch from 'render/actionDispatch'
-
-import { deleteUuid } from 'actions/uuid'
-
 const texttoClip  = clip => uuid => () => clip.writeText(uuid)
 const copyItem    = texttoClip(clipboard)
 
-const deleteItem  = actionDispatch(deleteUuid)
-
 function controller(attrs) {
-  const { dispatch } = attrs
-  const remove = deleteItem(dispatch)
-
-  return { copyItem, remove }
+  return { copyItem }
 }
 
 function view(ctrl, attrs) {
-  const { index } = attrs
+  const { index, remove } = attrs
   const { uuid }  = attrs.uuid
 
-  const { remove, copyItem } = ctrl
+  const { copyItem } = ctrl
 
   const useUuid = compose(remove(index), copyItem(uuid))
 
