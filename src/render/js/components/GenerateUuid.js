@@ -5,9 +5,7 @@ import {
   deleteUuid
 } from 'actions/uuid'
 
-import curry    from 'ramda/src/curry'
-import compose  from 'ramda/src/compose'
-import prop     from 'ramda/src/prop'
+import { curry, compose, prop } from 'shared/helpers'
 
 import actionDispatch from 'render/actionDispatch'
 

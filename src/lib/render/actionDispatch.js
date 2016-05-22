@@ -1,5 +1,4 @@
-import curry    from 'ramda/src/curry'
-import compose  from 'ramda/src/compose'
+import { curry, compose } from '../shared/helpers'
 
 const actionDispatch = curry(
   (action, dispatch, data) => compose(dispatch, action)(data)
