@@ -5,8 +5,6 @@ import {
   ipcRenderer
 } from 'electron'
 
-import { connect } from 'store'
-
 import GenerateUuid from './GenerateUuid'
 
 import sendToChannel  from 'shared/sendToChannel'
@@ -17,14 +15,11 @@ const sendTask = sendToChannel(ipcRenderer, 'task')
 function view(ctrl, attrs) {
   return (
     <div>
-      <GenerateUuid
-        copyText={copyText}
-        sendTask={sendTask}
-        {...attrs } />
+      <GenerateUuid copyText={copyText} sendTask={sendTask} />
     </div>
   )
 }
 
-const AppLayout = connect({ view })
+const AppLayout = { view }
 
 export default AppLayout

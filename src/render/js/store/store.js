@@ -1,6 +1,7 @@
 import m from 'mithril'
 
 import { createStore, applyMiddleware } from 'redux'
+import { id } from 'shared/helpers'
 
 import {
   UUID_ADD,
@@ -42,12 +43,17 @@ function reducer(state={}, action) {
 
 const store = createStore(reducer, {}, applyMiddleware(redraw))
 
-export function connect(Component) {
+export function connect(Component, qry=id) {
   return {
-    view() {
-      const state = store.getState()
+    view(ctrl, attrs) {
+      const state = qry(store.getState())
+
       return (
-        <Component dispatch={store.dispatch} {...state}/>
+        <Component
+          dispatch={store.dispatch}
+          {...state}
+          {...attrs}
+        />
       )
     }
   }
