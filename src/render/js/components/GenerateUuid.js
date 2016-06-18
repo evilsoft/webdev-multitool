@@ -5,7 +5,7 @@ import {
   deleteUuid
 } from 'actions/uuid'
 
-import { curry, compose, prop } from 'shared/helpers'
+import { curry, compose, prop, always } from 'shared/helpers'
 
 import actionDispatch from 'render/actionDispatch'
 
@@ -17,15 +17,13 @@ const deleteItem  = actionDispatch(deleteUuid)
 
 const requestUUID = curry((fn, num) => () => fn({ type: 'uuid', num }))
 
-const thunkId = x => () => x
-
 function controller(attrs) {
   const { dispatch, copyText, sendTask } = attrs
 
   const request = requestUUID(sendTask)
   const clear   = clearUuids(dispatch)
-  const remove  = x => compose(thunkId(x), deleteItem(dispatch), prop('index'))(x)
-  const copy    = x => compose(thunkId(x), copyText, prop('uuid'))(x)
+  const remove  = x => compose(always(x), deleteItem(dispatch), prop('index'))(x)
+  const copy    = x => compose(always(x), copyText, prop('uuid'))(x)
 
   const use = compose(remove, copy)
 
