@@ -10,7 +10,6 @@ const { ipcRenderer } = electron
 
 ipcRenderer.on('uuid', (e, data) => {
   store.dispatch(addUuid(data))
-  m.redraw()
 })
 
 export function start(options={}) {

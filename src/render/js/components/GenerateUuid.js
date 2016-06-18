@@ -1,30 +1,49 @@
 import m from 'mithril'
 
-import UuidItem   from './UuidItem'
+import {
+  clearUuid,
+  deleteUuid
+} from 'actions/uuid'
+
+import { curry, compose, prop, always } from 'shared/helpers'
+
+import actionDispatch from 'render/actionDispatch'
+
 import UuidEntry  from './UuidEntry'
+import UuidList   from './UuidList'
 
-function mapItems(Comp, attrs) {
-  const { dispatch } = attrs
+const clearUuids  = actionDispatch(clearUuid)
+const deleteItem  = actionDispatch(deleteUuid)
 
-  return function(uuid, index) {
-    return <Comp dispatch={dispatch} index={index} uuid={uuid} />
-  }
+const requestUUID = curry((fn, num) => () => fn({ type: 'uuid', num }))
+
+function controller(attrs) {
+  const { dispatch, copyText, sendTask } = attrs
+
+  const request = requestUUID(sendTask)
+  const clear   = clearUuids(dispatch)
+  const remove  = x => compose(always(x), deleteItem(dispatch), prop('index'))(x)
+  const copy    = x => compose(always(x), copyText, prop('uuid'))(x)
+
+  const use = compose(remove, copy)
+
+  return { clear, request, use }
 }
 
 function view(ctrl, attrs) {
-  const { uuids, dispatch } = attrs
+  const { uuids } = attrs
   const results = uuids || []
+
+  const { clear, use, request } = ctrl
 
   return (
     <div className="uuid">
-      <UuidEntry dispatch={dispatch} />
-      <ul className="uuid__results">
-        {results.map(mapItems(UuidItem, { dispatch }))}
-      </ul>
+      <UuidEntry request={request} clear={clear} />
+      <UuidList use={use} uuids={results} />
     </div>
   )
 }
 
-const GenerateUUID = { view }
+const GenerateUUID = { view, controller }
 
 export default GenerateUUID

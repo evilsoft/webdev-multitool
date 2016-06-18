@@ -5,8 +5,10 @@ import menus  from './menus'
 
 import sendToChannel from '../lib/shared/sendToChannel'
 
-import compose  from 'ramda/src/compose'
-import objOf    from 'ramda/src/objOf'
+import {
+  compose,
+  objOf
+} from '../lib/shared/helpers'
 
 import { v4 } from 'node-uuid'
 

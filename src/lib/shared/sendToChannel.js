@@ -1,4 +1,4 @@
-import curry from 'ramda/src/curry'
+import { curry } from '../shared/helpers'
 
 const _sendToChannel  = (target, channel, data) => target.send(channel, data)
 const sendToChannel   = curry(_sendToChannel)
