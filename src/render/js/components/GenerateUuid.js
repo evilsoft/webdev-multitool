@@ -1,11 +1,20 @@
 import m from 'mithril'
 
+import { connect } from 'store'
+
 import {
   clearUuid,
   deleteUuid
 } from 'actions/uuid'
 
-import { curry, compose, prop, always } from 'shared/helpers'
+import {
+  curry,
+  compose,
+  prop,
+  always,
+  pick,
+  defaultTo
+} from 'shared/helpers'
 
 import actionDispatch from 'render/actionDispatch'
 
@@ -44,6 +53,8 @@ function view(ctrl, attrs) {
   )
 }
 
-const GenerateUUID = { view, controller }
+const qry = compose(defaultTo({}), pick(['uuids']))
+
+const GenerateUUID = connect({ view, controller }, qry)
 
 export default GenerateUUID

@@ -7,14 +7,8 @@ function view(ctrl, attrs) {
   const useUuid = () => use({index, uuid})
 
   return (
-    <li className="uuid__item">
+    <li className="uuid__item" onclick={useUuid}>
       <span className="uuid__uuid">{uuid}</span>
-      <div className="uuid__buttons">
-        <button
-          className="button"
-          onclick={useUuid}
-          type="button">Use</button>
-      </div>
     </li>
   )
 }
